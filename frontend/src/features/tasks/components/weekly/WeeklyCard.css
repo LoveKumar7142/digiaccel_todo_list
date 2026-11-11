@@ -1,0 +1,102 @@
+.week-list {
+  display: grid;
+  gap: 16px;
+}
+
+.week-card {
+  padding: 14px;
+  border: 1px solid #e0e6fb;
+  border-radius: 18px;
+  background: linear-gradient(145deg, #f3f6ff, #fff 70%);
+  box-shadow: 0 4px 14px #202d6a0a;
+}
+
+.week-card:has(.week-toggle[aria-expanded="true"]) {
+  border-color: #aab8f5;
+}
+
+.week-toggle {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) 32px;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: #141d3b;
+  text-align: left;
+}
+
+.week-date {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.week-calendar,
+.week-chevron {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  color: #354cc9;
+  background: #e5ebff;
+  border-radius: 11px;
+}
+
+.week-calendar svg { width: 21px; height: 21px; }
+.week-chevron { border-radius: 50%; }
+.week-chevron svg { width: 17px; height: 17px; }
+
+.week-toggle:hover .week-chevron { background: #dce4ff; }
+.week-toggle[aria-expanded="true"] .week-chevron svg { transform: rotate(180deg); }
+
+.week-counts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.week-metric {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  min-height: 44px;
+  padding: 7px 10px;
+  border-radius: 9px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.week-metric strong {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.25;
+  font-variant-numeric: tabular-nums;
+}
+
+.week-open { background: #eef1ff; color: #3445a0; }
+.week-complete { background: #e8f6ee; color: #186047; }
+
+.week-card .week-progress {
+  height: 4px;
+  margin-top: 12px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e8edfc;
+}
+
+.week-card .week-progress::-webkit-progress-bar { background: #e8edfc; }
+.week-card .week-progress::-webkit-progress-value { background: #445ce7; border-radius: 999px; }
+.week-card .week-progress::-moz-progress-bar { background: #445ce7; border-radius: 999px; }
+
+.week-tasks {
+  margin-top: 14px;
+  padding-top: 4px;
+  border-top: 1px solid #e0e6fb;
+}

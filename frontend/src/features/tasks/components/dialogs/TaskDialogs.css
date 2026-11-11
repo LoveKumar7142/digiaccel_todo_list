@@ -1,0 +1,210 @@
+dialog {
+  width: min(calc(100% - 2rem), 29rem);
+  max-height: calc(100dvh - 2rem);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: 1.2rem;
+  color: inherit;
+  overflow-wrap: anywhere;
+}
+
+dialog::backdrop {
+  background: #141b3b80;
+}
+
+dialog[open] { animation: task-dialog-in 190ms ease-out both; }
+dialog[open]::backdrop { animation: task-backdrop-in 220ms ease-out both; }
+dialog.task-sheet[open] { animation: task-sheet-in 280ms cubic-bezier(.22, .75, .25, 1) both; }
+dialog[open][data-closing] { animation: task-dialog-out 180ms ease-in both; pointer-events: none; }
+dialog.task-sheet[open][data-closing] { animation: task-sheet-out 230ms cubic-bezier(.4, 0, 1, 1) both; }
+dialog[open][data-closing]::backdrop { animation: task-backdrop-out 180ms ease-in both; }
+
+@keyframes task-dialog-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes task-dialog-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+@keyframes task-sheet-in {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+@keyframes task-sheet-out {
+  from { transform: translateY(0); }
+  to { transform: translateY(100%); }
+}
+@keyframes task-backdrop-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes task-backdrop-out { from { opacity: 1; } to { opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  dialog[open],
+  dialog.task-sheet[open],
+  dialog[open]::backdrop { animation: none; }
+}
+
+.dialog-header,
+.dialog-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem;
+}
+
+.dialog-header {
+  margin-bottom: 0.7rem;
+}
+
+.dialog-header h2 {
+  font-size: 1.25rem;
+}
+
+.icon-button {
+  min-width: 44px;
+  font-size: 1.55rem;
+  color: var(--muted);
+}
+
+.dialog-actions {
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+fieldset {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  min-width: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+fieldset label {
+  display: grid;
+  gap: 0.3rem;
+  font-size: 0.9rem;
+  font-weight: 650;
+}
+
+fieldset input,
+fieldset textarea,
+fieldset select {
+  min-height: 44px;
+  width: 100%;
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 0.55rem;
+  padding: 0.55rem;
+  background: white;
+  color: inherit;
+  font-size: 1rem;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.description {
+  margin-top: 0.55rem;
+  white-space: pre-wrap;
+}
+
+.details {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.55rem 0.9rem;
+  font-size: 0.9rem;
+}
+
+.details dt {
+  color: var(--muted);
+}
+
+.details dd {
+  margin: 0;
+}
+
+dialog.task-sheet {
+  width: min(100%, var(--mobile-frame-width));
+  max-width: 100%;
+  max-height: min(585px, 76dvh);
+  margin: auto auto 0;
+  padding: 24px 24px max(32px, env(safe-area-inset-bottom));
+  border: 0;
+  border-radius: 8px 8px 0 0;
+}
+
+.task-sheet .dialog-header {
+  position: relative;
+  min-height: 27px;
+  margin-bottom: 32px;
+}
+
+.task-sheet .dialog-header h2 {
+  padding-right: 32px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 27px;
+}
+
+.task-sheet .dialog-header .icon-button {
+  position: absolute;
+  right: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.task-sheet fieldset { gap: 24px; }
+.task-sheet label {
+  min-width: 0;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+/* Priority uses the second column of the reference time row. */
+.sheet-schedule-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(12px, calc(100vw - 330px), 30px);
+}
+
+.task-sheet input,
+.task-sheet textarea,
+.task-sheet select {
+  height: 40px;
+  min-height: 40px;
+  padding: 0 10px;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.task-sheet textarea { height: 100px; padding-block: 10px; }
+.sheet-submit {
+  width: 100%;
+  min-height: 48px;
+  margin-top: 26px;
+  border-radius: 3px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+/* Compact the gaps on shorter screens so the sheet leaves the Home view visible. */
+@media (max-height: 800px) {
+  dialog.task-sheet {
+    padding-top: clamp(16px, calc(9dvh - 48px), 24px);
+    padding-bottom: max(clamp(16px, calc(12dvh - 64px), 32px), env(safe-area-inset-bottom));
+  }
+
+  .task-sheet .dialog-header { margin-bottom: clamp(14px, calc(11dvh - 56px), 32px); }
+  .task-sheet fieldset { gap: clamp(10px, calc(10dvh - 56px), 24px); }
+  .task-sheet textarea { height: clamp(62px, calc(20dvh - 60px), 100px); }
+  .sheet-submit { margin-top: clamp(12px, calc(10dvh - 54px), 26px); }
+}
+
+.dialog-header .icon-button { display: grid; place-items: center; color: #090e23; }

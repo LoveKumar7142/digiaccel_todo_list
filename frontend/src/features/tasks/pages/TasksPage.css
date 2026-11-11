@@ -1,0 +1,48 @@
+.app-shell {
+  --primary: #445ce7;
+  width: min(100%, var(--mobile-frame-width));
+  min-height: 100dvh;
+  margin: auto;
+  padding: 37px 24px 124px;
+  background: #fff;
+}
+.app-header { display: flex; align-items: center; gap: .65rem; margin-bottom: .7rem; }
+.app-header h1 { font-size: 1.25rem; }
+.section-title { margin: 1.5rem 0 .7rem; font-size: 18px; font-weight: 600; line-height: 1; }
+.add-button {
+  position: fixed;
+  inset: auto auto max(28px, env(safe-area-inset-bottom)) 50%;
+  transform: translateX(-50%);
+  display: grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  padding: 0;
+  border-radius: 50%;
+  font-size: 1.75rem;
+}
+.app-shell .task-row { border: 0; border-bottom: 1px solid #eeeef4; border-radius: 0; }
+.app-shell .task-content { padding-inline: 0; }
+.app-shell .search-box { border-radius: 3px; margin-bottom: .8rem; }
+.app-shell:has([aria-label="Search tasks"]) { padding-top: 20px; }
+.app-shell:has([aria-label="Search tasks"]) .app-header { height: 44px; margin-bottom: 20px; }
+.app-shell:has([aria-label="Search tasks"]) .app-header h1 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.app-shell .search-box { height: 47.42px; }
+.app-shell .search-box input { min-height: 0; height: 100%; }
+@media (max-width: 350px) {
+  .app-shell { padding-inline: .85rem; }
+}
+
+.app-header .icon-button { display: grid; place-items: center; color: #000; }
+.task-screen {
+  animation: task-screen-in 190ms cubic-bezier(.22, .75, .3, 1) both;
+}
+
+@keyframes task-screen-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .task-screen { animation: none; }
+}
