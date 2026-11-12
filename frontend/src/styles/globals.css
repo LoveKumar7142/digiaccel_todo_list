@@ -9,6 +9,12 @@
   --focus-border: #8796d9;
 }
 
+@media (max-width: 600px) {
+  :root {
+    --mobile-frame-width: 100%;
+  }
+}
+
 * {
   box-sizing: border-box;
 }
